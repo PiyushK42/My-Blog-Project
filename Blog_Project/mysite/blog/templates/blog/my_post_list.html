@@ -1,0 +1,9 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+  {% for post in posts %}
+     <div class="my_posts" style="border: 2px solid black; margin-bottom: 20px; border-radius:35px; border-color: grey; padding:0px 0px 15px 40px; background: linear-gradient(to bottom,#fff 0,#f8f8f8 100%); box-shadow: 0 15px 35px rgba(50,50,93,0.1), 0 5px 15px rgba(0,0,0,.07); color: blue">
+     	<h1><span class="glyphicon glyphicon-edit"></span><a href="{% url 'post_detail' pk=post.pk %}">  {{ post.title }}</a></h1>
+        <p><span class="glyphicon glyphicon-time"></span>  Created : {{ post.created_date|date:"D d M Y" }}<span style="display:inline-block; width: 60px;"></span>Comments: {{ post.approve_comments.count }}   <span class="glyphicon glyphicon-comment"></span><span style="display:inline-block; width: 60px;"></span>Likes  <span class="glyphicon glyphicon-thumbs-up"></span>  : {{ post.approve_likes.count }}</p>
+     </div>    	
+  {% endfor %}
+{% endblock %}  

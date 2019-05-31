@@ -3,11 +3,10 @@
 <div class="centrestage">
   {% for post in post_list %}
   <div class="post">
-     <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-     <div class="date">
-     	<h5>Published on: {{ post.published_date|date:"D d M Y" }}</h5>
+     <h1><b><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></b></h1>
+     <div class="postdetails" style="color: blue"><p><span class="glyphicon glyphicon-user"></span>   @{{ post.author }}</p>
      </div>
-     <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approve_comments.count }}</a>
+     <a href="{% url 'post_detail' pk=post.pk %}"><span class="glyphicon glyphicon-time"></span>   Published on: {{ post.published_date|date:"D d M Y" }}<span style="padding-left: 50px;"></span>Comments: {{ post.approve_comments.count }}   <span class="glyphicon glyphicon-comment"></span><span style="padding-left: 50px;"></span>Likes  <span class="glyphicon glyphicon-thumbs-up"></span>  :  {{ post.approve_likes.count }}</a>
   </div>
   {% endfor %}	
  

@@ -11,40 +11,67 @@
             </div><hr style="border:0.5px solid black;">
 
         {% else %}
-            <a class="btn btn-default" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
+            <a class="btn btn-primary" href="{% url 'post_publish' pk=post.pk %}">Publish</a>
         {% endif %}
 
       <p class='postcontent' >{{ post.text|safe|linebreaksbr }}</p>
+      <div class="USER" style="color: blue"><h5><span class="glyphicon glyphicon-user"></span>  @{{ post.author }}<span style="padding-left: 50px;"></span><span class="glyphicon glyphicon-comment"></span>  {{ post.approve_comments.count }}<span style="padding-left: 50px;"></span><span class="glyphicon glyphicon-thumbs-up"></span>  {{ post.approve_likes.count }}</h5></div>
 
 
       {% if user.is_authenticated %}
+         {% if user == post.author or post.author == None %}
+
           <a class="btn btn-primary" href="{% url 'post_edit' pk=post.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
           <a class="btn btn-primary" href="{% url 'post_remove' pk=post.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+          <a class="btn btn-primary btn-comment" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a> 
+
+         {% elif user != post.author %}
+       
+          <a class="btn btn-primary" href="{% url 'post_like' pk=post.pk %}">Like Post  <span class="glyphicon glyphicon-thumbs-up"></span></a>             
+          <a class="btn btn-primary btn-comment" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a>
+
+          {% for like in post.likepost.all %}
+             {% if user == like.author %}
+              <p style="color: blue;">You have liked the post.</p>
+             {% endif %}
+          {% endfor %}
+
+         {% endif %}    
       {% endif %}
 
-
-
-  
-  <a class="btn btn-primary btn-comment" href="{% url 'add_comment_to_post' pk=post.pk %}">Add comment</a><hr style="border:0.5px solid black;">
-  <div class="container">
+          
+  <hr style="border:0.5px solid black;">
+ <div class="container"> 
 
   {% for comment in post.comments.all %}
   <br>
       {% if user.is_authenticated or comment.approved_comment %}
 
             <div class="subcontainer">
-              {{ comment.created_date }}<hr>
+              <span class="glyphicon glyphicon-time"></span>  {{ comment.created_date }}<hr>
               {% if not comment.approved_comment %}
                   <a class="btn btn-default" href="{% url 'comment_remove' pk=comment.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
                   <a class="btn btn-default" href="{% url 'comment_approve' pk=comment.pk %}"><span class="glyphicon glyphicon-ok"></span></a>
               {% endif %}
 
-          <p>{{ comment.text|safe|linebreaks }}</p>
-          <p>Posted by: <strong>{{ comment.author }}</strong></p>
+              {% if user == comment.author and comment.approved_comment %}
+              <a class="btn btn-primary" href="{% url 'comment_remove' pk=comment.pk %}">Delete Comment</a> 
+              {% elif user.is_authenticated and comment.approved_comment %}
+              <a class="btn btn-primary" href="{% url 'comment_like' pk=comment.pk %}">Like Comment  <span class="glyphicon glyphicon-thumbs-up"></span></a>
+               {% for like in comment.likecomment.all %}
+                 {% if user == like.author %}
+                   <p style="color: blue;">You have liked the comment.</p>
+                 {% endif %}
+               {% endfor %}
+              {% endif %} 
+
+              <p>{{ comment.text|safe|linebreaks }}</p>
+              <p style="color: blue;"><span class="glyphicon glyphicon-user"></span>    Posted by: <strong> @{{ comment.author }}</strong><span style="padding-left: 50px;"></span>Likes  <span class="glyphicon glyphicon-thumbs-up"></span>  : {{ comment.approve_like.count }}</p>
+              
           </div>
-      {% endif %}
+      {% endif %} 
   {% empty %}
-      <p>No comments posted.</p>
+      <p><b>No comments posted.</b></p>
   {% endfor %}
 
 </div>

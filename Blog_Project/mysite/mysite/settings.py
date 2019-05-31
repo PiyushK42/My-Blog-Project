@@ -26,8 +26,8 @@ SECRET_KEY = '8qiuordke($dak(*4+g6t+@5rahl&0g$sg0u@&^cci5=8+=&co'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
-
+ALLOWED_HOSTS = []
+# 'django-env.kfzvnmpg2.ap-south-1.elasticbeanstalk.com'
 
 # Application definition
 
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap3',
     'blog'
 ]
 

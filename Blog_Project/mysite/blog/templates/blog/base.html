@@ -3,6 +3,7 @@
 <html>
     <head>
         <title>Blog Project</title>
+        <title>Blog Project</title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -21,9 +22,6 @@
         <link href="https://fonts.googleapis.com/css?family=Montserrat|Russo+One" rel="stylesheet">
 
 
-
-
-
 <body class='loader'>
 
 
@@ -32,7 +30,7 @@
 
 
       <ul class="nav navbar-nav">
-        <li><a class='navbar-brand bigbrand' href="{% url 'post_list' %}">My Tech blog</a></li>
+        <li><a class='navbar-brand bigbrand' href="{% url 'post_list' %}">My Tech Blog</a></li>
         <li><a href="{% url 'about' %}">About</a></li>
         <li><a href="https://www.github.com">Github</a></li>
         <li><a href="https://www.linkedin.com">LinkedIn</a></li>
@@ -46,7 +44,7 @@
         </li>
 
         <li>
-          <a href="{% url 'post_draft_list' %}">Drafts</a>
+          <a href="{% url 'my_posts' %}">My Posts</a>
         </li>
         <li>
           <a href="{% url 'logout' %}" >Log out</a>
@@ -56,7 +54,11 @@
           <a >Welcome: {{ user.username }}</a>
         </li>
           {% else %}
-          <li><a class='nav navbar-right' href="{% url 'login' %}" ><span class="glyphicon glyphicon-user"></span></a></li>
+          <ul class='nav navbar-nav navbar-right'>
+          <li><a href="{% url 'userlogin' %}" >Log In</a></li>
+          <li><a href="{% url 'signup' %}" >Sign Up</a></li>  
+          <li><a href="{% url 'login' %}" ><span class="glyphicon glyphicon-user"></span></a></li>
+        </ul>
         {% endif %}
 
       </ul>

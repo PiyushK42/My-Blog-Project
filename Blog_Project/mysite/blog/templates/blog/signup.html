@@ -1,0 +1,14 @@
+{% extends "blog/base.html" %}
+{% load bootstrap3 %}
+
+{% block content %}
+<div class="container">
+    <h1><span class="glyphicon glyphicon-file"></span><b>   SIGN UP</b></h1>
+    <form method="POST">
+        {% csrf_token %}
+        <!--{{form.as_p}}-->
+        {% bootstrap_form form %}
+        <input type="submit" value="Sign Up" class="btn btn-primary">
+    </form>
+</div>
+{% endblock %}

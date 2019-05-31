@@ -1,11 +1,11 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
-    <h1>New comment</h1>
+    <h1><span class="glyphicon glyphicon-comment"></span><b>   New comment </b><span class="glyphicon glyphicon-plus-sign"></span></h1>
     <form method="POST" class="post-form">
     {% csrf_token %}
     {{form.as_p}}
-    <button type="submit" class="save btn btn-default">Post Comment</button>
+    <button type="submit" class="save btn btn-primary">Post Comment</button>
     </form>
 
     <script>var editor = new MediumEditor('.editable');</script>

@@ -29,6 +29,7 @@ body{
   transform: translate3d(1ch, 0.05in, 1em);
   transition: transform 0.6s ease-in-out;
 }
+
 .subcontainer{
   max-width: 720px;
   border: 0px solid black;
@@ -65,6 +66,7 @@ body{
   animation:hue 10000ms infinite linear;
  
 }
+
 
 @keyframes spinify {
   0% {
